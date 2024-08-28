@@ -15,11 +15,17 @@ ALERT_MP3_FINISH = "C:\\Users\\IEVZPadmin\\OneDrive - Carlson Rezidor (1)\\IEVZP
 TOKEN = os.getenv("ALERTS_IN_UA_TOKEN")
 timeout = 15
 an_alarm_occurred = False
-output_devices = ["{660F4C74-75E6-4D28-9AC3-85D7DFC15C29}", # Output 3/4 (Komplete Audio 6 WDM Audio)
-                  "{0.0.0.00000000}.{EADDD941-5181-44FD-A51C-958110F6B5B6}", # Main Output (Komplete Audio 6 WDM Audio)
-]
+output_devices = ["{0.0.0.00000000}.{660f4c74-75e6-4d28-9ac3-85d7dfc15c29}", # Output 3/4 (Komplete Audio 6 WDM Audio)
+                  "{0.0.0.00000000}.{eaddd941-5181-44fd-a51c-958110f6b5b6}"] # Main Output (Komplete Audio 6 WDM Audio)
 
-
+# https://forum.videolan.org/viewtopic.php?t=160112
+# Get-ItemProperty "HKLM:\SYSTEM\CurrentControlSet\Enum\SWD\MMDEVAPI\*" | Where-Object {($_.FriendlyName -Match $AudioDeviceName) -and ($_.PSChildName -Match "0\.0\.0")} | Select-Object -Property FriendlyName,PSChildName
+# FriendlyName                               PSChildName
+# ------------                               -----------
+# Speakers (Synaptics HD Audio)              {0.0.0.00000000}.{5a4ecf41-2853-49d9-af1a-b1b474b0a419}
+# Output 3/4 (Komplete Audio 6 WDM Audio)    {0.0.0.00000000}.{660f4c74-75e6-4d28-9ac3-85d7dfc15c29}
+# S/PDIF Output (Komplete Audio 6 WDM Audio) {0.0.0.00000000}.{e1eef2ee-22af-476e-83a8-d6c4f4678287}
+# Main Output (Komplete Audio 6 WDM Audio)   {0.0.0.00000000}.{eaddd941-5181-44fd-a51c-958110f6b5b6}
 
 if TOKEN:
     alerts_client = AlertsClient(token=TOKEN)
