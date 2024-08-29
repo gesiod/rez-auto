@@ -56,9 +56,9 @@ if TOKEN:
                     if alert_kyiv_status.is_no_alert() != True and an_alarm_occurred != True:
                         an_alarm_occurred = True
                         print(f"{datetime.now():%Y-%m-%d %H:%M:%S} - Killing DownloadPlayer.exe")
-                        os.system('taskkill /IM DownloadPlayer.exe /F')
+                        os.system('taskkill /IM DownloadPlayer.exe')
                         print(f"{datetime.now():%Y-%m-%d %H:%M:%S} - Killing VLC")
-                        os.system('taskkill /IM vlc.exe /F')
+                        os.system('taskkill /IM vlc.exe')
                         print(f"{datetime.now():%Y-%m-%d %H:%M:%S} - ALERT_MP3_START")
                         for output_device in output_devices:                            
                             subprocess.Popen(f'vlc --no-loop --no-repeat --no-volume-save --aout=mmdevice --mmdevice-audio-device={output_device} --mmdevice-volume=0.99 "{ALERT_MP3_START}"')
@@ -69,9 +69,9 @@ if TOKEN:
                     if alert_kyiv_status.is_no_alert() and an_alarm_occurred:
                         an_alarm_occurred = False
                         print(f"{datetime.now():%Y-%m-%d %H:%M:%S} - Killing DownloadPlayer.exe")
-                        os.system('taskkill /IM DownloadPlayer.exe /F')
+                        os.system('taskkill /IM DownloadPlayer.exe')
                         print(f"{datetime.now():%Y-%m-%d %H:%M:%S} - Starting ALERT_MP3_FINISH")
-                        os.system('taskkill /IM vlc.exe /F')
+                        os.system('taskkill /IM vlc.exe')
                         
                         for output_device in output_devices: 
                             subprocess.Popen(f'vlc --no-loop --no-repeat --no-volume-save --aout=mmdevice --mmdevice-audio-device={output_device} --mmdevice-volume=0.99 --play-and-exit "{ALERT_MP3_FINISH}"')
@@ -79,9 +79,9 @@ if TOKEN:
                         print(f"{datetime.now():%Y-%m-%d %H:%M:%S} - Waiting 60 sec.")
                         sleep(60)
                         print(f"{datetime.now():%Y-%m-%d %H:%M:%S} - Killing VLC")
-                        os.system('taskkill /IM vlc.exe /F')
+                        os.system('taskkill /IM vlc.exe')
                         print(f"{datetime.now():%Y-%m-%d %H:%M:%S} - Killing DownloadPlayer.exe")
-                        os.system('taskkill /IM DownloadPlayer.exe /F')
+                        os.system('taskkill /IM DownloadPlayer.exe')
                         
                         print(f"{datetime.now():%Y-%m-%d %H:%M:%S} - Waiting 30 sec.")
                         sleep(30)
