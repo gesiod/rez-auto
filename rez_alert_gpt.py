@@ -30,9 +30,22 @@ def play_audio(file_path, devices, volume=0.99):
             f"--mmdevice-volume={volume}", file_path
         ])
 
+def play_audio_and_exit(file_path, devices, volume=0.99):
+    """Plays audio on specified output devices using VLC."""
+    for device in devices:
+        subprocess.Popen([
+            "vlc", "--no-loop", "--no-repeat", "--no-volume-save",
+            f"--aout=mmdevice", f"--mmdevice-audio-device={device}",
+            f"--mmdevice-volume={volume}", "--play-and-exit", file_path
+        ])
+
 def kill_process(process_name):
     """Kills a process by name."""
     os.system(f'taskkill /IM {process_name}')
+
+def kill_process_immid(process_name):
+    """Kills a process by name."""
+    os.system(f'taskkill /IM {process_name} /F')
 
 def restart_download_player():
     """Restarts the DownloadPlayer.exe process."""
@@ -45,7 +58,7 @@ def handle_alert(alert_status, an_alarm_occurred):
             an_alarm_occurred = False
             print(f"{datetime.now():%Y-%m-%d %H:%M:%S} - Alarm is over, starting ALERT_MP3_FINISH.")
             kill_process("DownloadPlayer.exe")
-            play_audio(ALERT_MP3_FINISH, OUTPUT_DEVICES)
+            play_audio_and_exit(ALERT_MP3_FINISH, OUTPUT_DEVICES)
             time.sleep(60)
             print(f"{datetime.now():%Y-%m-%d %H:%M:%S} - Restarting DownloadPlayer.exe.")
             restart_download_player()
@@ -54,7 +67,7 @@ def handle_alert(alert_status, an_alarm_occurred):
             an_alarm_occurred = True
             print(f"{datetime.now():%Y-%m-%d %H:%M:%S} - Alarm started, playing ALERT_MP3_START.")
             kill_process("DownloadPlayer.exe")
-            play_audio(ALERT_MP3_START, OUTPUT_DEVICES)
+            play_audio_and_exit(ALERT_MP3_START, OUTPUT_DEVICES)
             time.sleep(120)
 
     return an_alarm_occurred
