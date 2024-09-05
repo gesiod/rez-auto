@@ -9,10 +9,10 @@ import sys
 import subprocess
 
 load_dotenv()
+TOKEN = os.getenv("ALERTS_IN_UA_TOKEN")
 Download_Player_PATCH = "C:\\DownloadPlayer\\DownloadPlayer.exe"
 ALERT_MP3_START = "C:\\Users\\IEVZPadmin\\OneDrive - Carlson Rezidor (1)\\IEVZP\\IEVZP Alerts\\тревога.mp3"
 ALERT_MP3_FINISH = "C:\\Users\\IEVZPadmin\\OneDrive - Carlson Rezidor (1)\\IEVZP\\IEVZP Alerts\\отбой.mp3"
-TOKEN = os.getenv("ALERTS_IN_UA_TOKEN")
 timeout = 15
 an_alarm_occurred = False
 output_devices = ["{0.0.0.00000000}.{660f4c74-75e6-4d28-9ac3-85d7dfc15c29}", # Output 3/4 (Komplete Audio 6 WDM Audio)
